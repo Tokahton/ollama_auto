@@ -1,3 +1,4 @@
 # ollama_auto
 This Python script will choose random prompts that you have given, and it'll run "ollama run MODEL NAME" for each prompt entered. There's a 5 to 10 minute delay until the next prompt is chosen; of course, you can change the timer to your liking.
+
 <img width="550" height="550" alt="image" src="https://github.com/user-attachments/assets/9088f5a6-e4f2-4e39-ab61-02f3cb7f6fbc" />
