@@ -2,9 +2,9 @@ import subprocess
 import time
 import random
 from datetime import datetime
+import os
 
 MODEL_NAME = "MODEL NAME"  #your model name
-OUTPUT_FILE = "ollama_responses.txt"
 
 PROMPTS = [
     "Give me a random fun fact",
@@ -17,6 +17,8 @@ PROMPTS = [
 while True:
     prompt = random.choice(PROMPTS)
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # Create a filename based on timestamp and prompt
+    filename = f"response_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
 
     print(f"\n[{timestamp}] Sending prompt: {prompt}")
 
@@ -30,12 +32,13 @@ while True:
 
     response = result.stdout.strip()
 
-    with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
-        f.write(f"\n=== {timestamp} ===\n")
-        f.write(f"PROMPT:\n{prompt}\n\n")
-        f.write(f"RESPONSE:\n{response}\n")
-        f.write("\n" + "=" * 50 + "\n")
+    # Saves individual Responses
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(f"Timestamp: {timestamp}\n")
+        f.write(f"Prompt: {prompt}\n")
+        f.write(f"Response:\n{response}\n")
 
+    print(f"Saved response to {filename}")
     wait_time = random.randint(300, 600)  # 5–10 minutes
-    print(f"Saved response. Waiting {wait_time} seconds...\n")
+    print(f"Waiting {wait_time} seconds...\n")
     time.sleep(wait_time)
